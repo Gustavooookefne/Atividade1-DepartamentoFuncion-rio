@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,9 +27,9 @@ public class Funcionario {
     @Column(name = "cargo", nullable = false)
     private String cargo;
 
-    @OneToMany
-    @JoinColumn(name = "Id_funcionario")
-    private Funcionario funcionario;
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario")
+    private Departamento departamento;
 
     public Funcionario(String nome, double salario, String cargo) {
         this.nome = nome;

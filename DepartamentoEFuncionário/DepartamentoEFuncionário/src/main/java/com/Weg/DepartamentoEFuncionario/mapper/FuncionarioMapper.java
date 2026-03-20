@@ -14,7 +14,7 @@ public class FuncionarioMapper {
 
                 requestDto.nome(),
                 requestDto.salario(),
-                requestDto.departamento()
+                requestDto.cargo()
 
         );
     }

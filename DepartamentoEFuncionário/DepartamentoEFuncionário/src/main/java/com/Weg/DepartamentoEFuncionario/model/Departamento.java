@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -18,6 +20,9 @@ public class Departamento {
 
     @Column(name = "nome_departamento", nullable = false)
     private String nomeDoDepartamento;
+
+    @OneToMany(mappedBy = "departamento")
+    private List<Funcionario> funcionarios;
 
     public Departamento(String s) {
     }
