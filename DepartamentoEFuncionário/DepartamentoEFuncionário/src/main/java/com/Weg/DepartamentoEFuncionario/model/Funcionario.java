@@ -26,6 +26,10 @@ public class Funcionario {
     @Column(name = "cargo", nullable = false)
     private String cargo;
 
+    @OneToMany
+    @JoinColumn(name = "Id_funcionario")
+    private Funcionario funcionario;
+
     public Funcionario(String nome, double salario, String cargo) {
         this.nome = nome;
         this.salario = salario;
