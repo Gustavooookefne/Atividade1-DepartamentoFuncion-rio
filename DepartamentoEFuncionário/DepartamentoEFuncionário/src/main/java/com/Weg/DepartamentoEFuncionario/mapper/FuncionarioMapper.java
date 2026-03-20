@@ -3,7 +3,9 @@ package com.Weg.DepartamentoEFuncionario.mapper;
 import com.Weg.DepartamentoEFuncionario.dto.FuncionarioDto.FuncionarioRequestDto;
 import com.Weg.DepartamentoEFuncionario.dto.FuncionarioDto.FuncionarioResponseDto;
 import com.Weg.DepartamentoEFuncionario.model.Funcionario;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FuncionarioMapper {
 
     public Funcionario paraEntidade(FuncionarioRequestDto requestDto){
