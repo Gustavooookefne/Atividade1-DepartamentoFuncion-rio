@@ -1,4 +1,7 @@
 package com.Weg.DepartamentoEFuncionario.dto.DepartamentoDto;
 
-public class DepartamentoResponseDto {
+public record DepartamentoResponseDto (
+        Long id,
+        String nomeDoDepartamento
+){
 }
