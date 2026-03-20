@@ -1,6 +1,9 @@
 package com.Weg.DepartamentoEFuncionario.dto.FuncionarioDto;
 
-public record FuncionalidadeRequestDto (
+import java.util.UUID;
+
+public record FuncionarioResponseDto(
+        UUID id,
         String nome,
         double salario,
         String departamento
