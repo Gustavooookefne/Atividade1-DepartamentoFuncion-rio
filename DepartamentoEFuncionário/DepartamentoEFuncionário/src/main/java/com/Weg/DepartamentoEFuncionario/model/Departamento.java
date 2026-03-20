@@ -18,4 +18,7 @@ public class Departamento {
 
     @Column(name = "nome_departamento", nullable = false)
     private String nomeDoDepartamento;
+
+    public Departamento(String s) {
+    }
 }
