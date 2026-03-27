@@ -4,8 +4,7 @@ import com.Weg.DepartamentoEFuncionario.dto.DepartamentoDto.DepartamentoRequestD
 import com.Weg.DepartamentoEFuncionario.dto.DepartamentoDto.DepartamentoResponseDto;
 import com.Weg.DepartamentoEFuncionario.service.DepartamentoService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,27 +15,28 @@ public class DepartamentoController {
 
     private final DepartamentoService service;
 
-    public DepartamentoResponseDto salvar (DepartamentoRequestDto requestDto) {
-
+    @PutMapping
+    public DepartamentoResponseDto salvar (@RequestBody DepartamentoRequestDto requestDto) {
         return service.salvar(requestDto);
     }
 
+    @GetMapping
     public List<DepartamentoResponseDto> listarTodos () {
-
         return service.listarTOdos();
     }
 
-    public DepartamentoResponseDto listarPorId (Long id) {
-
+    @GetMapping("/{id}")
+    public DepartamentoResponseDto listarPorId (@PathVariable Long id) {
         return service.listarPorID(id);
     }
 
-    public DepartamentoResponseDto atualizar (DepartamentoRequestDto requestDto , Long id){
-
+    @PostMapping("/{id}")
+    public DepartamentoResponseDto atualizar (@RequestBody DepartamentoRequestDto requestDto ,@PathVariable Long id){
         return service.atulizar(requestDto , id);
     }
 
-    public void deletar (Long id){
+    @DeleteMapping("/{id}")
+    public void deletar (@PathVariable Long id){
         service.deletar(id);
     }
 }
