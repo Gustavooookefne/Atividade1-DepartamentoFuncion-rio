@@ -28,17 +28,17 @@ public class FuncionarioController {
         return service.listarTodos();
     }
     @GetMapping("/{id}")
-    public FuncionarioResponseDto listarPorId (UUID id){
+    public FuncionarioResponseDto listarPorId (@PathVariable UUID id){
 
         return service.listarPorId(id);
     }
     @PostMapping("/{id}")
-    public FuncionarioResponseDto atulizar (FuncionarioRequestDto requestDto, UUID id){
+    public FuncionarioResponseDto atulizar (@RequestBody FuncionarioRequestDto requestDto,@PathVariable UUID id){
 
         return service.atualizar(requestDto , id);
     }
     @DeleteMapping("/{id}")
-    public void deletar (UUID id){
+    public void deletar (@PathVariable UUID id){
 
         service.deletar(id);
     }
