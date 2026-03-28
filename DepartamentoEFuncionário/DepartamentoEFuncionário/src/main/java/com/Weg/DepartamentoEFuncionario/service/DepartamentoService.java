@@ -24,7 +24,7 @@ public class DepartamentoService {
         return mapper.paraDto(repository.save(departamento));
     }
 
-    public List<DepartamentoResponseDto> listarTOdos () {
+    public List<DepartamentoResponseDto> listarTodos () {
         return repository.findAll()
                 .stream()
                 .map(mapper::paraDto)

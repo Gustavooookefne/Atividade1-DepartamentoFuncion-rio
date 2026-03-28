@@ -29,7 +29,6 @@ public class FuncionarioController {
     }
     @GetMapping("/{id}")
     public FuncionarioResponseDto listarPorId (@PathVariable UUID id){
-
         return service.listarPorId(id);
     }
     @PostMapping("/{id}")

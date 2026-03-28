@@ -2,8 +2,11 @@ package com.Weg.DepartamentoEFuncionario.controller;
 
 import com.Weg.DepartamentoEFuncionario.dto.DepartamentoDto.DepartamentoRequestDto;
 import com.Weg.DepartamentoEFuncionario.dto.DepartamentoDto.DepartamentoResponseDto;
+import com.Weg.DepartamentoEFuncionario.model.Departamento;
 import com.Weg.DepartamentoEFuncionario.service.DepartamentoService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +19,36 @@ public class DepartamentoController {
     private final DepartamentoService service;
 
     @PutMapping
-    public DepartamentoResponseDto salvar (@RequestBody DepartamentoRequestDto requestDto) {
-        return service.salvar(requestDto);
+    public ResponseEntity<DepartamentoResponseDto> salvar (@RequestBody DepartamentoRequestDto requestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(service.salvar(requestDto));
     }
 
     @GetMapping
-    public List<DepartamentoResponseDto> listarTodos () {
-        return service.listarTOdos();
+    public ResponseEntity<List<DepartamentoResponseDto>> listarTodos () {
+        List<DepartamentoResponseDto> departamentos = service.listarTodos();
+
+        return ResponseEntity.ok().body(departamentos);
     }
 
     @GetMapping("/{id}")
-    public DepartamentoResponseDto listarPorId (@PathVariable Long id) {
-        return service.listarPorID(id);
+    public ResponseEntity<DepartamentoResponseDto> listarPorId (@PathVariable Long id) {
+        DepartamentoResponseDto responseDto = service.listarPorID(id);
+
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @PostMapping("/{id}")
-    public DepartamentoResponseDto atualizar (@RequestBody DepartamentoRequestDto requestDto ,@PathVariable Long id){
-        return service.atulizar(requestDto , id);
+    public ResponseEntity<DepartamentoResponseDto> atualizar (@RequestBody DepartamentoRequestDto requestDto ,@PathVariable Long id){
+        DepartamentoResponseDto responseDto = service.atulizar(requestDto , id);
+
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar (@PathVariable Long id){
+    public ResponseEntity<Void> deletar (@PathVariable Long id){
         service.deletar(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
