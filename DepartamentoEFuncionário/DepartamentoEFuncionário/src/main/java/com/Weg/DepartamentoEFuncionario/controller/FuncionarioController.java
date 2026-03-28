@@ -5,6 +5,8 @@ import com.Weg.DepartamentoEFuncionario.dto.FuncionarioDto.FuncionarioResponseDt
 import com.Weg.DepartamentoEFuncionario.model.Funcionario;
 import com.Weg.DepartamentoEFuncionario.service.FuncionarioService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +20,34 @@ public class FuncionarioController {
     private final FuncionarioService service;
 
     @PutMapping
-    public FuncionarioResponseDto salvar (@RequestBody FuncionarioRequestDto requestDto){
-
-        return service.salvar(requestDto);
+    public ResponseEntity<FuncionarioResponseDto> salvar (@RequestBody FuncionarioRequestDto requestDto){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(service.salvar(requestDto));
     }
     @GetMapping
-    public List<FuncionarioResponseDto> listarTodos(){
+    public ResponseEntity<List<FuncionarioResponseDto>> listarTodos(){
+           List<FuncionarioResponseDto> responseDtos = service.listarTodos();
 
-        return service.listarTodos();
+           return ResponseEntity.ok().body(responseDtos);
+
     }
     @GetMapping("/{id}")
-    public FuncionarioResponseDto listarPorId (@PathVariable UUID id){
-        return service.listarPorId(id);
+    public ResponseEntity<FuncionarioResponseDto> listarPorId (@PathVariable UUID id){
+            FuncionarioResponseDto responseDto = service.listarPorId(id);
+
+            return ResponseEntity.ok().body(responseDto);
     }
     @PostMapping("/{id}")
-    public FuncionarioResponseDto atulizar (@RequestBody FuncionarioRequestDto requestDto,@PathVariable UUID id){
+    public ResponseEntity<FuncionarioResponseDto> atulizar (@RequestBody FuncionarioRequestDto requestDto,@PathVariable UUID id){
+            FuncionarioResponseDto responseDto = service.atualizar(requestDto , id);
 
-        return service.atualizar(requestDto , id);
+        return ResponseEntity.ok().body(responseDto);
     }
     @DeleteMapping("/{id}")
-    public void deletar (@PathVariable UUID id){
-
+    public ResponseEntity<Void> deletar (@PathVariable UUID id){
         service.deletar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
